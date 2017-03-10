@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::resource('firmware', 'FirmwareController');
+Route::resource('premium', 'PremiumController');
