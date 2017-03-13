@@ -157,16 +157,16 @@ class FirmwareController extends Controller {
                         umask($mask);
                     }
                     break;
-              /*  case '102':
-                    $validatorobj = new Validator();
+               case '102':
+                   // $validatorobj = new Validator();
                     $post = $_POST;
-                    if(!$validatorobj->convert_original_id($post['userId'])) {
+                   /* if(!$validatorobj->convert_original_id($post['userId'])) {
                         $result['status'] = '151';      //151 is when user enters invalid data
                         $result['error'] = 'invalid user id : '. $post['userId'];
                         $result['result'] = '';
                         Log::warning($rnd. ": invalid user id : ".  $post['userId']." @".__CLASS__ .":".__METHOD__.":".__LINE__);
                         $this->respond($result);
-                    }
+                    }*/
                     //get the latest essential version from db
                     $dbObj = new model\FirmwareFiles();
                     $whereArray = Array('type' => 'es');            
@@ -190,7 +190,7 @@ class FirmwareController extends Controller {
                     Log::info($rnd. ":  response is : ". json_encode($result) ." @".__CLASS__ .":".__METHOD__.":".__LINE__);
                     $this->respond($result);
 
-                    break;*/
+                    break;
             }
 	}
 
