@@ -18,3 +18,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::post('/firmware', 'FirmwareController@store');
+Route::post('/test', 'UserController@store');
