@@ -19,3 +19,4 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/firmware', 'FirmwareController@store');
 Route::post('/test', 'UserController@store');
+Route::post('/user', 'UserController@store');
