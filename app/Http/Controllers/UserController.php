@@ -38,9 +38,9 @@ class UserController extends Controller
        
 	$request->request->add(['rand' => $rand ]);
         
-        app('App\Http\Controllers\CommonController')->logData($request, json_encode($request->input()), 'info');
+      //  app('App\Http\Controllers\CommonController')->logData($request, json_encode($request->input()), 'info');
 		
-        app('App\Http\Controllers\GenericController')->validateData($request);
+     //   app('App\Http\Controllers\GenericController')->validateData($request);
         
         switch ($request->input('type')) {
             case 100:
