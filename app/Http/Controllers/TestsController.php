@@ -34,11 +34,20 @@ class TestsController extends Controller
         $testsObj = new Model\Tests();
         
         $getTestVideo = $testsObj->getTestVideo($request);
+        foreach ($getTestVideo as $getTestVideos){
+            
+            if($getTestVideos['instructions'] != ''){
+              
+            $instructions = explode('-', $getTestVideos['instructions']);
+            $getTestVideos['instructions'] = $instructions;
+        }
+       
+        }
         
         if($getTestVideo != FALSE){            
             $result['success'] = TRUE;
             $result['error'] = '';
-            $result['data'] = $getTestVideo;
+            $result['data'] = $getTestVideos;
         }else{
             $result['success'] = FALSE;
             $result['error'] = 'Technical Error';
