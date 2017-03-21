@@ -19,7 +19,7 @@ class TestsController extends Controller
         app('App\Http\Controllers\CommonController')->logData($request, json_encode($request->input()), 'info');
 
         switch ($request->input('type')) {
-            case 300:
+            case 100:
               // register  
                 $this->getTestVideos($request);
                 break;
