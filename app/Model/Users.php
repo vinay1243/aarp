@@ -15,7 +15,7 @@ class Users extends Model {
 
         //print_r($request->input);die();
         $data = $request->input();
-        $detailsArray = array('first_name' => $data['first_name'],
+        $userArray = array('first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => isset($data['email']) ? $data['email'] : NULL,
             'mobile' => $data['mobile'],
@@ -28,10 +28,12 @@ class Users extends Model {
             'created_dttm' => date("Y-m-d H:i:s", time()),
             'updated_by' => 0
         );
+        
+      //  $detailsArray = array('address'=>$data);
         \DB::beginTransaction();
 
         try {
-            $result = \DB::table($this->table)->insertGetId($detailsArray);
+            $result = \DB::table($this->table)->insertGetId($userArray);
             //  $encrypted_id = $this->encrypt($result, $this->encryption_key);
             //   $user_id_encrypt = $this->idEncrypt($encrypted_id,$result);
             if ($result) {
