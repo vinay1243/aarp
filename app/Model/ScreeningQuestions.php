@@ -8,9 +8,9 @@ class ScreeningQuestions extends Model
 {
     protected $table = 'screening_questions';
     
-    public function getScreeningQuestions($request) {
+    public function getScreeningQuestions($data) {
          
-        $result = \DB::table($this->table)->where('type','1')->first();
+        $result = \DB::table($this->table)->where('level',$data['level'])->first();
      
         return $result->json_questions;
     }

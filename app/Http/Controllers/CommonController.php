@@ -5,15 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Model;
-class CommonController extends Controller
-{
+
+class CommonController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         //
     }
 
@@ -22,8 +22,7 @@ class CommonController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -33,19 +32,18 @@ class CommonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         //
         $rand = rand(99, 99999);
-       
-	$request->request->add(['rand' => $rand ]);
-        
+
+        $request->request->add(['rand' => $rand]);
+
         app('App\Http\Controllers\CommonController')->logData($request, json_encode($request->input()), 'info');
-		
-        
+
+
         switch ($request->input('type')) {
             case 200:
-              // register  
+                // register  
                 $this->getQuestions($request);
                 break;
             default:
@@ -59,8 +57,7 @@ class CommonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -70,8 +67,7 @@ class CommonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -82,8 +78,7 @@ class CommonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -93,66 +88,67 @@ class CommonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
-    
-    // all user controller related validations will be done here
-    
-    public function logData($request, $logMsg, $logType, $return = '') {
-		$logMsg = $request->input('rand') . " : " . $logMsg;
-		switch ($logType) {
-			case 'error':
-				Log::error($logMsg);
-				break;
-			case 'warning':
-				Log::warning($logMsg);
-				break;
-			case 'info':
-				Log::info($logMsg);
-				break;
-			default:
-				break;
-		}
-		
-		if($return != '') {
-			echo json_encode($return, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE );
-			exit;
-		}
-	}
-        
-        
-    public function validateData($request) {
-        
-        if($request->input('type') == NULL) {
-			$this->logData($request, "Invalid or missing command value", 'error', Array("empty"));
-		}
-                
-                switch ($request->input('type')) {
-                    case 100:
-                        $this->validateRegister($request);
-                        break;
 
-                    default:
-                        break;
-                }       
-    }
-    
-    public function getQuestions($request){
-        
-       
-        $questionsObj = new Model\ScreeningQuestions();
-        
-        $result = $questionsObj->getScreeningQuestions($request);
-         
-            echo $result;
-    }
-    
-      public function respond($response, $exit = true)
-        {
-            echo json_encode($response, JSON_UNESCAPED_SLASHES);
-            exit();
+    // all user controller related validations will be done here
+
+    public function logData($request, $logMsg, $logType, $return = '') {
+        $logMsg = $request->input('rand') . " : " . $logMsg;
+        switch ($logType) {
+            case 'error':
+                Log::error($logMsg);
+                break;
+            case 'warning':
+                Log::warning($logMsg);
+                break;
+            case 'info':
+                Log::info($logMsg);
+                break;
+            default:
+                break;
         }
-    
+
+        if ($return != '') {
+            echo json_encode($return, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            exit;
+        }
+    }
+
+    public function validateData($request) {
+
+        if ($request->input('type') == NULL) {
+            $this->logData($request, "Invalid or missing command value", 'error', Array("empty"));
+        }
+        $data_set = $request->input();
+        switch ($request->input('type')) {
+            case 100:
+                $this->validateRegister($data_set);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public function getQuestions($data_set) {
+
+
+        $questionsObj = new Model\ScreeningQuestions();
+
+        $questions = $questionsObj->getScreeningQuestions($data_set);
+
+//        $result['success'] = TRUE;
+//        $result['error'] = '';
+//        $result['data'] = $questions;
+//        $this->respond($result);
+        echo $questions;
+    }
+
+    public function respond($response, $exit = true) {
+        echo json_encode($response, JSON_UNESCAPED_SLASHES);
+        exit();
+    }
+
 }
