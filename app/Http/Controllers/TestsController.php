@@ -40,8 +40,7 @@ class TestsController extends Controller
               
             $instructions = explode('-', $getTestVideos['instructions']);
             $getTestVideos['instructions'] = $instructions;
-        }
-       
+        }       
         }
         
         if($getTestVideo != FALSE){            
