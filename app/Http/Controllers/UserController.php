@@ -140,7 +140,7 @@ class UserController extends Controller {
 
         // to validate the registeration fields in hepler called common 
         $commonObj = new Common();
-        $validate = $commonObj->validateRegister($request);
+        $validate = $commonObj->validateRegister($data_set);
 
         // if it returns not valid then it returns error 
         if (!$validate['isValid']) {
@@ -163,7 +163,7 @@ class UserController extends Controller {
             $this->respond($result);
         }
         // saving the user in users model and returns the user id 
-        $saveUser = $usersObj->saveUser($request);
+        $saveUser = $usersObj->saveUser($data_set);
         // $save User variable has user id of the record which is inserted
         if ($saveUser) {
             // if saveUser exists then it will return user_id with success as true   

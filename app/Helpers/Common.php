@@ -13,10 +13,10 @@ class Common {
      * and open the template in the editor.
      */
 
-    public function validateRegister($request) {
+    public function validateRegister($data_set) {
 
         $data = Array('isValid' => true, 'invalidData' => array());
-        $fields = $request->input();
+        $fields = $data_set;
         $data = Array('isValid' => true, 'invalidData' => array());
         if ((!isset($fields['first_name']) || empty($fields['first_name'])) && (!isset($fields['last_name']) || empty($fields['last_name']))) {
             $data['isValid'] = false;
